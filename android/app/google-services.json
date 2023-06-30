@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "586122152554",
+    "project_id": "filter-x-app",
+    "storage_bucket": "filter-x-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:586122152554:android:d5bb5d954c70f1db0c5813",
+        "android_client_info": {
+          "package_name": "com.osman.filter_x"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "586122152554-s9s9v72l5sjhgt6v86m2kuatbnueqh09.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwGb2U96HD9-9T0gl91rGfW99YsGiYvXg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "586122152554-s9s9v72l5sjhgt6v86m2kuatbnueqh09.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
