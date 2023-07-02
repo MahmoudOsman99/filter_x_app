@@ -11,6 +11,7 @@ class DefaultTextFormField extends StatelessWidget {
   final TextInputAction? buttonInputStyle;
   final TextInputType? keyboardType;
   final Icon? suffixIcon;
+  final bool? fillTextFormField;
   DefaultTextFormField({
     super.key,
     required this.controller,
@@ -20,6 +21,7 @@ class DefaultTextFormField extends StatelessWidget {
     this.buttonInputStyle,
     this.keyboardType,
     this.suffixIcon,
+    this.fillTextFormField,
   });
 
   @override
@@ -29,8 +31,11 @@ class DefaultTextFormField extends StatelessWidget {
       children: [
         Text(
           lable ?? "",
-          style: context.textList.displayMedium!
-              .copyWith(color: AppColors.blackTextColor, fontSize: 16),
+          style: context.textList.displayMedium!.copyWith(
+            color: AppColors.blackTextColor,
+            fontSize: 16,
+            fontFamily: 'customArabic',
+          ),
         ),
         SizedBox(
           height: context.height * 0.01,
@@ -41,9 +46,11 @@ class DefaultTextFormField extends StatelessWidget {
             controller: controller,
             obscureText: isPassword ?? false,
             style: context.textList.bodySmall!.copyWith(
-                color: context.isDarkMode
-                    ? AppColors.blackTextColor
-                    : AppColors.whiteColor),
+              color: context.isDarkMode
+                  ? AppColors.blackTextColor
+                  : AppColors.whiteColor,
+              fontFamily: 'customArabic',
+            ),
             textInputAction: buttonInputStyle,
             keyboardType: keyboardType,
             decoration: InputDecoration(
