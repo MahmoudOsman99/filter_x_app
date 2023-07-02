@@ -1,4 +1,10 @@
 class AppStrings {
+  //! Global Text
+  static String yesText = 'نعم';
+  static String noText = 'لا';
+  static String saveText = 'حفظ';
+  static String cancelText = 'الغاء';
+
   //! Signin text
   static String signinText = 'Sign in';
   static String forgotPasswordText = 'Forgot Password?';
@@ -23,4 +29,12 @@ class AppStrings {
   static String signUpText = 'Sign Up';
 
   static String alreadyHaveAccountText = 'Already have an account?';
+
+  //! Related Device Strings
+  static String deviceListNameText = 'قائمة اجهزة الفلاتر';
+  static String deviceNameText = 'اسم الجهاز';
+  static String deviceNOSText = 'عدد المراحل';
+  static String deviceHasWarrantyText = 'يوجد ضمان؟';
+  static String deviceNOWIfExistInMonthText = 'مدة الضمان بالشهر';
+  static String deviceEditInformationText = 'تعديل معلومات الفلتر';
 }

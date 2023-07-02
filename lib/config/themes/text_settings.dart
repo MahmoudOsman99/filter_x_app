@@ -24,4 +24,10 @@ TextTheme textSettings = const TextTheme(
     fontSize: 24,
     color: Colors.white,
   ),
+  bodyMedium: TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+    color: AppColors.blackTextColor,
+    fontFamily: 'customArabic',
+  ),
 );
