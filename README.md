@@ -1,16 +1,14 @@
-# filter_x
+# Filter X App
 
 A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project to convert my old system that has been built by C# into flutter project using firebase
+trying to make that app main poit to assist me on my work
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This project for:
+1 - Save Clients thay using water filters on there houses
+2 - Monitor the installments and monthly installment 
+3 - Monitor the performance for the filters 
+4 - Monitor and remember theme for the time to change the candels for the filter
