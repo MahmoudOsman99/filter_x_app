@@ -21,6 +21,10 @@ dependencies:
   firebase_core: 
   cloud_firestore: 
   conditional_builder_null_safety: 
+  get_it: 
+  fluttertoast : ^8.2.2
+  internet_connection_checker_plus: 
+  shared_preferences: 
   image: 
 
   

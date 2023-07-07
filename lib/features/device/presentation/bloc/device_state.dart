@@ -7,4 +7,19 @@ abstract class DeviceState extends Equatable {
   List<Object> get props => [];
 }
 
-class DeviceInitial extends DeviceState {}
+class DeviceInitialState extends DeviceState {}
+
+class DeviceLoadingState extends DeviceState {}
+
+class DeviceLoadedState extends DeviceState {
+  final List<DeviceEntity> devices;
+  const DeviceLoadedState(this.devices);
+
+  @override
+  List<Object> get props => devices;
+}
+
+class DeviceErrorState extends DeviceState {
+  final String error;
+  const DeviceErrorState(this.error);
+}

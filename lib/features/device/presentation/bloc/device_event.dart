@@ -8,3 +8,11 @@ abstract class DeviceEvent extends Equatable {
 }
 
 class DeviceInitialEvent extends DeviceEvent {}
+
+class GetAllDeviceEvent extends DeviceEvent {}
+
+class DeviceLoadingEvent extends DeviceEvent {}
+
+class DeviceLoadedEvent extends DeviceEvent {}
+
+class DeviceErrorEvent extends DeviceEvent {}

@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dartz/dartz_unsafe.dart';
 import 'package:filter_x/config/app_colors.dart';
 import 'package:filter_x/config/extensions/app_extensions.dart';
 import 'package:filter_x/config/strings.dart';
@@ -5,6 +7,7 @@ import 'package:filter_x/core/shared/images_path.dart';
 import 'package:filter_x/core/shared/radius_values.dart';
 import 'package:filter_x/core/shared_widgets/default_button.dart';
 import 'package:filter_x/core/shared_widgets/default_text_form_field.dart';
+import 'package:filter_x/features/device/data/models/device_model.dart';
 import 'package:filter_x/features/device/domain/entities/device_entity.dart';
 import 'package:filter_x/features/device/presentation/widgets/device_item.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +35,20 @@ class _DeviceDetailsState extends State<DeviceDetails> {
 
   final NOWIfExistsController = TextEditingController();
 
+  final db = FirebaseFirestore.instance;
+
+  bool setDataToModelFromControllers() {
+    widget.device.name = nameController.text;
+    widget.device.NOS = int.parse(NOSController.text);
+    if (widget.device.hasWarranty) {
+      if (int.parse(NOWIfExistsController.text) <= 0) {
+        return false;
+      }
+    }
+    widget.device.NOWIfExistInMonth = int.parse(NOWIfExistsController.text);
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     nameController.text = widget.device.name;
@@ -39,6 +56,7 @@ class _DeviceDetailsState extends State<DeviceDetails> {
     hasWarrantyController.text =
         widget.device.hasWarranty ? AppStrings.yesText : AppStrings.noText;
     NOWIfExistsController.text = widget.device.NOWIfExistInMonth.toString();
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -48,109 +66,146 @@ class _DeviceDetailsState extends State<DeviceDetails> {
             start: 20,
             top: 20,
           ),
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                Text(
-                  widget.device.name,
-                  style: context.textList.displayLarge!.copyWith(
-                    fontFamily: 'customArabic',
-                  ),
-                ),
-                // CircleAvatar(
-                //   radius: 100,
-                //   backgroundImage: AssetImage(deviceImagePath),
-                // )
-                DeviceItem(device: widget.device),
-                SizedBox(
-                  height: context.height * 0.08,
-                ),
-                SizedBox(
-                  height: context.height * 0.55,
-                  width: context.width,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(borderRadiusValue),
-                      color: AppColors.lightOrangeColor,
-                      border: Border.all(
-                        color: AppColors.orangeColor,
-                        width: 1,
+          child: LayoutBuilder(
+            builder: (context, constraints) => SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                child: Column(
+                  children: [
+                    Text(
+                      widget.device.name,
+                      style: context.textList.displayLarge!.copyWith(
+                        fontFamily: 'customArabic',
                       ),
                     ),
-                    child: Padding(
-                      padding: EdgeInsets.all(paddingValue),
-                      child: Column(
-                        children: [
-                          Text(
-                            AppStrings.deviceEditInformationText,
+                    // CircleAvatar(
+                    //   radius: 100,
+                    //   backgroundImage: AssetImage(deviceImagePath),
+                    // )
+                    DeviceItem(device: widget.device),
+                    SizedBox(
+                      height: context.height * 0.08,
+                    ),
+                    SizedBox(
+                      // height: context.height * 0.6,
+                      width: context.width,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(borderRadiusValue),
+                          color: AppColors.lightOrangeColor,
+                          border: Border.all(
+                            color: AppColors.orangeColor,
+                            width: 1,
                           ),
-                          SizedBox(
-                            height: context.height * 0.01,
-                          ),
-                          Form(
-                            key: formKey,
-                            child: Column(
-                              children: [
-                                DefaultTextFormField(
-                                  controller: nameController,
-                                  lable: AppStrings.deviceNameText,
-                                ),
-                                DefaultTextFormField(
-                                  controller: NOSController,
-                                  lable: AppStrings.deviceNOSText,
-                                  keyboardType:
-                                      const TextInputType.numberWithOptions(),
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(paddingValue),
+                          child: Column(
+                            children: [
+                              Text(
+                                AppStrings.deviceEditInformationText,
+                              ),
+                              SizedBox(
+                                height: context.height * 0.01,
+                              ),
+                              Form(
+                                key: formKey,
+                                child: Column(
                                   children: [
-                                    Text(
-                                      AppStrings.deviceHasWarrantyText,
-                                      style: context.textList.bodyMedium,
+                                    DefaultTextFormField(
+                                      controller: nameController,
+                                      lable: AppStrings.deviceNameText,
+                                      validator: validator,
                                     ),
-                                    Switch(
-                                        // This bool value toggles the switch.
-                                        value: widget.device.hasWarranty,
-                                        activeColor: Colors.green,
-                                        onChanged: (bool value) {
-                                          // This is called when the user toggles the switch.
-                                          widget.device.hasWarranty = value;
-                                          setState(() {});
-                                        }),
+
+                                    DefaultTextFormField(
+                                      controller: NOSController,
+                                      lable: AppStrings.deviceNOSText,
+                                      keyboardType: const TextInputType
+                                          .numberWithOptions(),
+                                      validator: validator,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          AppStrings.deviceHasWarrantyText,
+                                          style: context.textList.bodyMedium,
+                                        ),
+                                        Switch(
+                                          // This bool value toggles the switch.
+                                          value: widget.device.hasWarranty,
+
+                                          activeColor: Colors.green,
+                                          onChanged: (bool value) {
+                                            // This is called when the user toggles the switch.
+                                            // widget.device.hasWarranty = value;
+                                            setState(() {
+                                              widget.device.hasWarranty = value;
+                                            });
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                    // DefaultTextFormField(
+                                    //   controller: hasWarrantyController,
+                                    //   lable: AppStrings.deviceHasWarrantyText,
+                                    // ),
+                                    SizedBox(
+                                      height: context.height * 0.01,
+                                    ),
+                                    DefaultTextFormField(
+                                      controller: NOWIfExistsController,
+                                      lable: AppStrings
+                                          .deviceNOWIfExistInMonthText,
+                                      validator: validator,
+                                    ),
+                                    SizedBox(
+                                      height: context.height * 0.02,
+                                    ),
+                                    DefualtButton(
+                                      text: AppStrings.saveText,
+                                      onPressed: () {
+                                        if (formKey.currentState!.validate() &&
+                                            setDataToModelFromControllers()) {
+                                          db
+                                              .collection(AppStrings
+                                                  .deviceCollectionFirebaseNameText)
+                                              .doc(widget.device.ID)
+                                              .update(
+                                                DeviceModel.toJson(
+                                                  widget.device,
+                                                ),
+                                              )
+                                              .then((value) {
+                                            print('updated');
+                                          }).catchError((error) =>
+                                                  print(error.toString()));
+                                        } else {}
+                                      },
+                                    )
                                   ],
                                 ),
-                                // DefaultTextFormField(
-                                //   controller: hasWarrantyController,
-                                //   lable: AppStrings.deviceHasWarrantyText,
-                                // ),
-                                DefaultTextFormField(
-                                  controller: NOWIfExistsController,
-                                  lable: AppStrings.deviceNOWIfExistInMonthText,
-                                ),
-                                SizedBox(
-                                  height: context.height * 0.02,
-                                ),
-                                DefualtButton(
-                                  text: AppStrings.saveText,
-                                  onPressed: () {
-                                    print(formKey.currentState!.validate());
-                                  },
-                                )
-                              ],
-                            ),
-                          )
-                        ],
+                              )
+                            ],
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                )
-              ],
+                  ],
+                ),
+              ),
             ),
           ),
         ),
       ),
     );
   }
+}
+
+String? validator(String? value) {
+  if (value!.trim().isEmpty) return AppStrings.requiredFieldText;
+  return null;
 }
