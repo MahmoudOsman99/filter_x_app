@@ -4,6 +4,9 @@ class AppStrings {
   static String noText = 'لا';
   static String saveText = 'حفظ';
   static String cancelText = 'الغاء';
+  static String requiredFieldText = 'هذا الحقل مطلوب!';
+  static String deletedSuccessfullysaveText = 'تم الحذف بنجاح';
+  static String savedText = 'تم الحفظ بنجاح';
 
   //! Signin text
   static String signinText = 'Sign in';
@@ -31,10 +34,15 @@ class AppStrings {
   static String alreadyHaveAccountText = 'Already have an account?';
 
   //! Related Device Strings
+  static String deviceCollectionFirebaseNameText = 'device';
   static String deviceListNameText = 'قائمة اجهزة الفلاتر';
   static String deviceNameText = 'اسم الجهاز';
   static String deviceNOSText = 'عدد المراحل';
   static String deviceHasWarrantyText = 'يوجد ضمان؟';
   static String deviceNOWIfExistInMonthText = 'مدة الضمان بالشهر';
   static String deviceEditInformationText = 'تعديل معلومات الفلتر';
+
+  //! Error Messages
+  static String serverFailureMessageText = 'خطأ في الاتصال بالخادم';
+  static String offlineFailureMessageText = 'من فضلك نحقق من الاتصال بالانترنت';
 }

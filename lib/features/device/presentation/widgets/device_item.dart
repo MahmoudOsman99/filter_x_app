@@ -21,7 +21,7 @@ class DeviceItem extends StatelessWidget {
           AppRoutes.singleDeviceRoute,
           arguments: device,
         );
-        print(device);
+        // print(device);
       },
       child: SizedBox(
         height: context.height / 5,

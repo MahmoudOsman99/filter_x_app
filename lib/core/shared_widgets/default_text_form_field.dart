@@ -12,6 +12,7 @@ class DefaultTextFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final Icon? suffixIcon;
   final bool? fillTextFormField;
+  String? Function(String? val)? validator;
   DefaultTextFormField({
     super.key,
     required this.controller,
@@ -22,6 +23,7 @@ class DefaultTextFormField extends StatelessWidget {
     this.keyboardType,
     this.suffixIcon,
     this.fillTextFormField,
+    this.validator,
   });
 
   @override
@@ -44,6 +46,7 @@ class DefaultTextFormField extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           child: TextFormField(
             controller: controller,
+            validator: validator,
             obscureText: isPassword ?? false,
             style: context.textList.bodySmall!.copyWith(
               color: context.isDarkMode

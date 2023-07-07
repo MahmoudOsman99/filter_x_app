@@ -28,7 +28,7 @@ class DeviceModel extends DeviceEntity {
     );
   }
 
-  Map<String, dynamic> toJson(DeviceModel device) {
+  static Map<String, dynamic> toJson(DeviceEntity device) {
     return {
       'ID': device.ID,
       'name': device.name,
