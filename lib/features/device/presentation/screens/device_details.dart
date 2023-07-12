@@ -2,9 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz_unsafe.dart';
 import 'package:filter_x/config/app_colors.dart';
 import 'package:filter_x/config/extensions/app_extensions.dart';
-import 'package:filter_x/config/strings.dart';
+import 'package:filter_x/core/Strings/app_strings.dart';
+import 'package:filter_x/core/Strings/collections_names.dart';
 import 'package:filter_x/core/shared/images_path.dart';
-import 'package:filter_x/core/shared/radius_values.dart';
+import 'package:filter_x/core/shared/app_constants_value.dart';
 import 'package:filter_x/core/shared_widgets/default_button.dart';
 import 'package:filter_x/core/shared_widgets/default_text_form_field.dart';
 import 'package:filter_x/features/device/data/models/device_model.dart';
@@ -53,8 +54,9 @@ class _DeviceDetailsState extends State<DeviceDetails> {
   Widget build(BuildContext context) {
     nameController.text = widget.device.name;
     NOSController.text = widget.device.NOS.toString();
-    hasWarrantyController.text =
-        widget.device.hasWarranty ? AppStrings.yesText : AppStrings.noText;
+    hasWarrantyController.text = widget.device.hasWarranty
+        ? AppStrings.yesTextArabic
+        : AppStrings.noTextArabic;
     NOWIfExistsController.text = widget.device.NOWIfExistInMonth.toString();
 
     return Scaffold(
@@ -91,8 +93,8 @@ class _DeviceDetailsState extends State<DeviceDetails> {
                       width: context.width,
                       child: DecoratedBox(
                         decoration: BoxDecoration(
-                          borderRadius:
-                              BorderRadius.circular(borderRadiusValue),
+                          borderRadius: BorderRadius.circular(
+                              AppConstantsValues.borderRadiusValue15),
                           color: AppColors.lightOrangeColor,
                           border: Border.all(
                             color: AppColors.orangeColor,
@@ -100,11 +102,12 @@ class _DeviceDetailsState extends State<DeviceDetails> {
                           ),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.all(paddingValue),
+                          padding:
+                              EdgeInsets.all(AppConstantsValues.paddingValue20),
                           child: Column(
                             children: [
                               Text(
-                                AppStrings.deviceEditInformationText,
+                                AppStrings.deviceEditInformationTextArabic,
                               ),
                               SizedBox(
                                 height: context.height * 0.01,
@@ -115,13 +118,13 @@ class _DeviceDetailsState extends State<DeviceDetails> {
                                   children: [
                                     DefaultTextFormField(
                                       controller: nameController,
-                                      lable: AppStrings.deviceNameText,
+                                      lable: AppStrings.deviceNameTextArabic,
                                       validator: validator,
                                     ),
 
                                     DefaultTextFormField(
                                       controller: NOSController,
-                                      lable: AppStrings.deviceNOSText,
+                                      lable: AppStrings.deviceNOSTextArabic,
                                       keyboardType: const TextInputType
                                           .numberWithOptions(),
                                       validator: validator,
@@ -131,7 +134,8 @@ class _DeviceDetailsState extends State<DeviceDetails> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          AppStrings.deviceHasWarrantyText,
+                                          AppStrings
+                                              .deviceHasWarrantyTextArabic,
                                           style: context.textList.bodyMedium,
                                         ),
                                         Switch(
@@ -159,19 +163,19 @@ class _DeviceDetailsState extends State<DeviceDetails> {
                                     DefaultTextFormField(
                                       controller: NOWIfExistsController,
                                       lable: AppStrings
-                                          .deviceNOWIfExistInMonthText,
+                                          .deviceNOWIfExistInMonthTextArabic,
                                       validator: validator,
                                     ),
                                     SizedBox(
                                       height: context.height * 0.02,
                                     ),
                                     DefualtButton(
-                                      text: AppStrings.saveText,
+                                      text: AppStrings.saveTextArabic,
                                       onPressed: () {
                                         if (formKey.currentState!.validate() &&
                                             setDataToModelFromControllers()) {
                                           db
-                                              .collection(AppStrings
+                                              .collection(CollectionsNames
                                                   .deviceCollectionFirebaseNameText)
                                               .doc(widget.device.ID)
                                               .update(
@@ -206,6 +210,6 @@ class _DeviceDetailsState extends State<DeviceDetails> {
 }
 
 String? validator(String? value) {
-  if (value!.trim().isEmpty) return AppStrings.requiredFieldText;
+  if (value!.trim().isEmpty) return AppStrings.requiredFieldTextArabic;
   return null;
 }

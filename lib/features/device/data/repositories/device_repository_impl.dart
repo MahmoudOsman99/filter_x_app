@@ -22,7 +22,7 @@ class DeviceRepositoryImpl extends DeviceRepository {
 
   @override
   Future<Either<Failure, List<DeviceModel>>> getAllDevices() async {
-    if (await networkInfo.isConnected) {
+    if (await networkInfo.hasConnection) {
       try {
         final devices = await deviceRemoteDataSource.getAllDevices();
         deviceLocalDataSource.cacheDevices(devices);

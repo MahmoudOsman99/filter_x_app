@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:filter_x/config/strings.dart';
+import 'package:filter_x/core/Strings/app_strings.dart';
 import 'package:filter_x/features/device/domain/entities/device_entity.dart';
 import 'package:filter_x/features/device/domain/usecases/add_device_usecase.dart';
 import 'package:filter_x/features/device/domain/usecases/delete_device_usecase.dart';
@@ -43,9 +43,9 @@ class DeviceBloc extends Bloc<DeviceEvent, DeviceState> {
   String _mapFailureToMessage(Failure failure) {
     switch (failure.runtimeType) {
       case ServerFailure:
-        return AppStrings.serverFailureMessageText;
+        return AppStrings.serverFailureMessageTextArabic;
       case OfflineFailure:
-        return AppStrings.offlineFailureMessageText;
+        return AppStrings.offlineFailureMessageTextArabic;
       default:
         return "Unexpected Error , Please try again later .";
     }

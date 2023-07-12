@@ -1,12 +1,12 @@
 import 'package:filter_x/config/app_colors.dart';
 import 'package:filter_x/config/extensions/app_extensions.dart';
-import 'package:filter_x/config/strings.dart';
+import 'package:filter_x/core/Strings/app_strings.dart';
 import 'package:filter_x/core/router_settings/routes.dart';
 import 'package:filter_x/features/device/domain/entities/device_entity.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/shared/images_path.dart';
-import '../../../../core/shared/radius_values.dart';
+import '../../../../core/shared/app_constants_value.dart';
 
 class DeviceItem extends StatelessWidget {
   final DeviceEntity device;
@@ -33,7 +33,7 @@ class DeviceItem extends StatelessWidget {
               color: AppColors.orangeColor,
             ),
             borderRadius: BorderRadius.circular(
-              borderRadiusValue,
+              AppConstantsValues.borderRadiusValue15,
             ),
           ),
           child: Padding(
@@ -46,20 +46,20 @@ class DeviceItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${AppStrings.deviceNameText}: ${device.name}',
+                      '${AppStrings.deviceNameTextArabic}: ${device.name}',
                       style: context.textList.bodyMedium,
                     ),
                     Text(
-                      '${AppStrings.deviceNOSText}: ${device.NOS}',
+                      '${AppStrings.deviceNOSTextArabic}: ${device.NOS}',
                       style: context.textList.bodyMedium,
                     ),
                     Text(
-                      '${AppStrings.deviceHasWarrantyText}: ${device.hasWarranty == true ? AppStrings.yesText : AppStrings.noText}',
+                      '${AppStrings.deviceHasWarrantyTextArabic}: ${device.hasWarranty == true ? AppStrings.yesTextArabic : AppStrings.noTextArabic}',
                       style: context.textList.bodyMedium,
                     ),
                     device.hasWarranty
                         ? Text(
-                            '${AppStrings.deviceNOWIfExistInMonthText}: ${device.NOWIfExistInMonth}',
+                            '${AppStrings.deviceNOWIfExistInMonthTextArabic}: ${device.NOWIfExistInMonth}',
                             style: context.textList.bodyMedium,
                           )
                         : SizedBox(),
@@ -67,12 +67,12 @@ class DeviceItem extends StatelessWidget {
                 ),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(
-                    borderRadiusValue,
+                    AppConstantsValues.borderRadiusValue15,
                   ), // Image border
                   child: SizedBox.fromSize(
                     size: Size.fromRadius(context.width * 0.15), // Image radius
                     child: Image.asset(
-                      deviceImagePath,
+                      AppAssets.deviceImagePath,
                       fit: BoxFit.cover,
                     ),
                   ),

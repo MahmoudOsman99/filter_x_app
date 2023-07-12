@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:filter_x/config/strings.dart';
+import 'package:filter_x/core/Strings/app_strings.dart';
+import 'package:filter_x/core/Strings/collections_names.dart';
 import 'package:filter_x/core/error/exceptions.dart';
 import 'package:filter_x/core/network/network_info.dart';
 import 'package:filter_x/features/device/data/datasources/remote/device_remote_datasource.dart';
@@ -12,7 +13,7 @@ class DeviceRemoteDataSourceWithFirebase extends DeviceRemoteDataSource {
   final db = FirebaseFirestore.instance;
   final NetworkInfo networkInfo;
 
-  DeviceRemoteDataSourceWithFirebase(this.networkInfo);
+  DeviceRemoteDataSourceWithFirebase({required this.networkInfo});
 
   @override
   Future<Unit> addDevice(DeviceEntity device) {
@@ -22,13 +23,13 @@ class DeviceRemoteDataSourceWithFirebase extends DeviceRemoteDataSource {
 
   @override
   Future<Unit> deleteDevice(String deviceId) async {
-    if (await networkInfo.isConnected) {
+    if (await networkInfo.hasConnection) {
       db
-          .collection(AppStrings.deviceCollectionFirebaseNameText)
+          .collection(CollectionsNames.deviceCollectionFirebaseNameText)
           .doc(deviceId)
           .delete()
           .then((value) {
-        print(AppStrings.deletedSuccessfullysaveText);
+        print(AppStrings.deletedSuccessfullysaveTextArabic);
       }).onError((error, stackTrace) {
         print(error.toString());
       });

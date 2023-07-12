@@ -1,9 +1,11 @@
 import 'package:filter_x/core/shared_widgets/error_screen.dart';
 import 'package:filter_x/features/device/domain/entities/device_entity.dart';
 import 'package:filter_x/features/device/presentation/screens/device_details.dart';
+import 'package:filter_x/features/installments/presentation/screens/installments_list_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../features/device/presentation/screens/device_screen.dart';
+import '../../features/employees/presentation/screens/employee_profile_screen.dart';
 import 'routes.dart';
 
 class AppRouter {
@@ -11,8 +13,18 @@ class AppRouter {
     switch (settings.name) {
       // case AppRoutes.signinRoute:
       //   return MaterialPageRoute(builder: (context) => SigninScreen());
-      case AppRoutes.deviceRoute:
+      case AppRoutes.productRoute:
         return MaterialPageRoute(builder: (context) => DeviceScreen());
+      case AppRoutes.installmentsRoute:
+        return MaterialPageRoute(
+            builder: (context) => const InstallmentsScreen());
+
+      case AppRoutes.employeesRoute:
+        return MaterialPageRoute(
+            builder: (context) => const EmployeeProfileScreen());
+
+      // case AppRoutes.employeeRoute:
+      //   return MaterialPageRoute(builder: (context) => EmployeeProfileScreen());
 
       case AppRoutes.singleDeviceRoute:
         return MaterialPageRoute(
