@@ -1,0 +1,49 @@
+name: filter_x
+description: A new Flutter project.
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.5 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  flutter_bloc:
+  bloc:
+  dartz:
+  equatable:
+  firebase_auth: 
+  firebase_core: 
+  cloud_firestore: 
+  conditional_builder_null_safety: 
+  get_it: 
+  fluttertoast : ^8.2.2
+  internet_connection_checker_plus: 
+  shared_preferences: 
+  intl: 
+  image: 
+
+  
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+  fonts:
+    - family: customArabic
+      fonts:
+        # - asset: assets/fonts/Baloo_Bhaijaan_2_Regular.ttf
+        - asset: assets/fonts/BalooBhaijaan2-SemiBold.ttf
+  
